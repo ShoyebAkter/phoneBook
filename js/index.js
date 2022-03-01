@@ -49,6 +49,14 @@ const displayDetails=(data)=>{
             return date;
         }
     }
+    let others=data.data.others;
+    let othersValue;
+    if(others ==undefined){
+        // console.log(others);
+        othersValue="No values";
+    }else{
+othersValue=Object.values(others);
+    }
     
     const phoneDetails=document.getElementById("phone-details");
     phoneDetails.innerHTML='';
@@ -63,7 +71,7 @@ const displayDetails=(data)=>{
                 <span>${data.data.mainFeatures.displaySize}</span> <br>
                 <span>${data.data.mainFeatures.chipSet}</span><br>
                 <span>${data.data.mainFeatures.sensors}</span><br>
-                <span>${data.data.others.WLAN}</span>
+                <span>${othersValue}</span>
                 </p>
             </div>
     `;
