@@ -10,16 +10,17 @@ const searchPhone=()=>{
 
 const searchResult=(phones)=>{
     const output=document.getElementById("output");
+    output.innerHTML='';
     phones.forEach(phone => {
-        console.log(phone);
+        // console.log(phone);
         const div=document.createElement('div');
         div.classList.add("col");
         div.innerHTML=`
-        <div class="card">
+        <div onclick="details('${phone.slug}')" class="card">
                 <img src="${phone.image}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${phone.phone_name}</h5>
-                    <button id="details" onclick="details('${phone.slug}')">Details</button>
+
                 </div>
             </div>
         `;
@@ -32,19 +33,25 @@ const details=(id)=>{
     fetch(link)
     .then(res=>res.json())
     .then(data=>displayDetails(data));
-
 }
 
 const displayDetails=(data)=>{
     console.log(data);
-    const detailInfo=document.getElementById("details");
-    // detailInfo.style.display=none;
-    const p=document.createElement('p');
-    p.innerHTML=`
-    <span>${data.data.mainFeatures.storage}</span> <br>
-    <span>${data.data.mainFeatures.displaySize}</span> <br>
-    <span>${data.data.mainFeatures.chipSet}</span> <br>
-    <span>${data.data.mainFeatures.memory}</span>
+    const phoneDetails=document.getElementById("phone-details");
+    phoneDetails.innerHTML='';
+    const div=document.createElement('div');
+    div.classList.add("card");
+    div.innerHTML=`
+    <img src="${data.data.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${data.data.name}</h5>
+                <p class="card-text">${data.data.mainFeatures.storage} <br>
+                <span> ${data.data.releaseDate}</span> <br>
+                <span>${data.data.mainFeatures.displaySize}</span> <br>
+                <span>${data.data.mainFeatures.chipSet}</span>
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
     `;
-    detailInfo.appendChild(p);
+    phoneDetails.appendChild(div);
 }
