@@ -33,10 +33,12 @@ const details=(id)=>{
     fetch(link)
     .then(res=>res.json())
     .then(data=>displayDetails(data));
+    output.innerHTML='';
 }
 
 const displayDetails=(data)=>{
     console.log(data);
+    
     const phoneDetails=document.getElementById("phone-details");
     phoneDetails.innerHTML='';
     const div=document.createElement('div');
@@ -50,7 +52,6 @@ const displayDetails=(data)=>{
                 <span>${data.data.mainFeatures.displaySize}</span> <br>
                 <span>${data.data.mainFeatures.chipSet}</span>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
     `;
     phoneDetails.appendChild(div);
