@@ -16,11 +16,12 @@ const searchResult=(phones)=>{
         const div=document.createElement('div');
         div.classList.add("col");
         div.innerHTML=`
-        <div onclick="details('${phone.slug}')" class="card">
-                <img src="${phone.image}" class="card-img-top" alt="...">
-                <div class="card-body">
+        <div  class="card border-0">
+                <img src="${phone.image}" class="card-img-top w-50 mx-auto" alt="...">
+                <div class="card-body text-center">
                     <h5 class="card-title">${phone.phone_name}</h5>
-
+                    <h5 class="card-title">${phone.brand}</h5>
+                    <button onclick="details('${phone.slug}')"  type="button" class="btn btn-primary">Details</button>
                 </div>
             </div>
         `;
@@ -38,21 +39,29 @@ const details=(id)=>{
 
 const displayDetails=(data)=>{
     console.log(data);
-    
+    const isReleaseDate=(date)=>{
+        if(date===""){
+            return "No release date";
+        }else{
+            return date;
+        }
+    }
     const phoneDetails=document.getElementById("phone-details");
     phoneDetails.innerHTML='';
     const div=document.createElement('div');
     div.classList.add("card");
     div.innerHTML=`
-    <img src="${data.data.image}" class="card-img-top" alt="...">
-            <div class="card-body">
+    <img src="${data.data.image}" class="card-img-top w-25 mx-auto" alt="...">
+            <div class="card-body text-center">
                 <h5 class="card-title">${data.data.name}</h5>
                 <p class="card-text">${data.data.mainFeatures.storage} <br>
-                <span> ${data.data.releaseDate}</span> <br>
+                <span> '${isReleaseDate(data.data.releaseDate)}'</span> <br>
                 <span>${data.data.mainFeatures.displaySize}</span> <br>
                 <span>${data.data.mainFeatures.chipSet}</span>
                 </p>
             </div>
     `;
     phoneDetails.appendChild(div);
+    // phoneDetails.innerHTML='';
+    
 }
