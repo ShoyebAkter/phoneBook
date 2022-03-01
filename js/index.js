@@ -9,9 +9,12 @@ const searchPhone=()=>{
 }
 
 const searchResult=(phones)=>{
+    const newPhones=phones.slice(0,20);
     const output=document.getElementById("output");
     output.innerHTML='';
-    phones.forEach(phone => {
+    newPhones.forEach(phone => {
+            const phoneDetails=document.getElementById("phone-details");
+    phoneDetails.innerHTML='';
         // console.log(phone);
         const div=document.createElement('div');
         div.classList.add("col");
@@ -46,6 +49,7 @@ const displayDetails=(data)=>{
             return date;
         }
     }
+    
     const phoneDetails=document.getElementById("phone-details");
     phoneDetails.innerHTML='';
     const div=document.createElement('div');
@@ -57,7 +61,9 @@ const displayDetails=(data)=>{
                 <p class="card-text">${data.data.mainFeatures.storage} <br>
                 <span> '${isReleaseDate(data.data.releaseDate)}'</span> <br>
                 <span>${data.data.mainFeatures.displaySize}</span> <br>
-                <span>${data.data.mainFeatures.chipSet}</span>
+                <span>${data.data.mainFeatures.chipSet}</span><br>
+                <span>${data.data.mainFeatures.sensors}</span><br>
+                <span>${data.data.others.WLAN}</span>
                 </p>
             </div>
     `;
